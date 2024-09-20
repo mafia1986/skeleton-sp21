@@ -3,23 +3,28 @@ package deque;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class ArrayDeque<T> implements Deque<T>{
+public class ArrayDeque<T> implements Iterable<T> {
     private T[] items;
     private int size;
     private int capacity;
     private int nextFirst;
     private int nextLast;
     public ArrayDeque() {
-        this(8);
-    }
-    public ArrayDeque(int capacity) {
+ //       this(8);
         size = 0;
-        this.capacity = capacity;
+        this.capacity = 8;
         items = (T[]) new Object[capacity];
         nextFirst = capacity / 2 - 1;
         nextLast = nextFirst + 1;
     }
-    @Override
+//    public ArrayDeque(int capacity) {
+//        size = 0;
+//        this.capacity = capacity;
+//        items = (T[]) new Object[capacity];
+//        nextFirst = capacity / 2 - 1;
+//        nextLast = nextFirst + 1;
+//    }
+
     public void addFirst(T item) {
         if(isFull()) {
             resize(2 * capacity);
@@ -28,7 +33,7 @@ public class ArrayDeque<T> implements Deque<T>{
         nextFirst = (nextFirst - 1) >= 0 ? nextFirst - 1 : (nextFirst - 1 + capacity) % capacity;
         size += 1;
     }
-    @Override
+
     public void addLast(T item) {
         if(isFull()) {
             resize(2 * capacity);
@@ -57,18 +62,18 @@ public class ArrayDeque<T> implements Deque<T>{
         }
         return false;
     }
-    @Override
+
     public boolean isEmpty() {
         if(size == 0) {
             return true;
         }
         return false;
     }
-    @Override
+
     public int size() {
         return size;
     }
-    @Override
+
     public void printDeque() {
         int i = (nextFirst + 1) % capacity;
         for(int n = size; n > 0; n -= 1) {
@@ -80,7 +85,7 @@ public class ArrayDeque<T> implements Deque<T>{
         }
         System.out.println();
     }
-    @Override
+
     public T removeFirst() {
         if(size > 0) {
             nextFirst = (nextFirst + 1) % capacity;
@@ -89,7 +94,7 @@ public class ArrayDeque<T> implements Deque<T>{
         }
         return null;
     }
-    @Override
+
     public T removeLast() {
         if(size > 0) {
             nextLast = (nextLast - 1) >= 0 ? nextLast - 1 : (nextLast - 1 + capacity) % capacity;
@@ -98,13 +103,14 @@ public class ArrayDeque<T> implements Deque<T>{
         }
         return null;
     }
-    @Override
+
     public T get(int index) {
         if(index >= 0 && index < size) {
             return items[(nextFirst + 1 + index) % capacity];
         }
         return null;
     }
+    @Override
     public Iterator<T> iterator() {
         return new Iterator<T>() {
             private int index = (nextFirst + 1) % capacity;
