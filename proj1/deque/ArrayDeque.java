@@ -3,28 +3,21 @@ package deque;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class ArrayDeque<T> implements Iterable<T> {
+public class ArrayDeque<T> implements Iterable<T>, Deque<T> {
     private T[] items;
     private int size;
     private int capacity;
     private int nextFirst;
     private int nextLast;
     public ArrayDeque() {
- //       this(8);
         size = 0;
         this.capacity = 8;
         items = (T[]) new Object[capacity];
         nextFirst = capacity / 2 - 1;
         nextLast = nextFirst + 1;
     }
-//    public ArrayDeque(int capacity) {
-//        size = 0;
-//        this.capacity = capacity;
-//        items = (T[]) new Object[capacity];
-//        nextFirst = capacity / 2 - 1;
-//        nextLast = nextFirst + 1;
-//    }
 
+    @Override
     public void addFirst(T item) {
         if(isFull()) {
             resize(2 * capacity);
@@ -34,6 +27,7 @@ public class ArrayDeque<T> implements Iterable<T> {
         size += 1;
     }
 
+    @Override
     public void addLast(T item) {
         if(isFull()) {
             resize(2 * capacity);
@@ -63,6 +57,7 @@ public class ArrayDeque<T> implements Iterable<T> {
         return false;
     }
 
+    @Override
     public boolean isEmpty() {
         if(size == 0) {
             return true;
@@ -70,10 +65,12 @@ public class ArrayDeque<T> implements Iterable<T> {
         return false;
     }
 
+    @Override
     public int size() {
         return size;
     }
 
+    @Override
     public void printDeque() {
         int i = (nextFirst + 1) % capacity;
         for(int n = size; n > 0; n -= 1) {
@@ -86,6 +83,7 @@ public class ArrayDeque<T> implements Iterable<T> {
         System.out.println();
     }
 
+    @Override
     public T removeFirst() {
         if(size > 0) {
             nextFirst = (nextFirst + 1) % capacity;
@@ -95,6 +93,7 @@ public class ArrayDeque<T> implements Iterable<T> {
         return null;
     }
 
+    @Override
     public T removeLast() {
         if(size > 0) {
             nextLast = (nextLast - 1) >= 0 ? nextLast - 1 : (nextLast - 1 + capacity) % capacity;
@@ -104,6 +103,7 @@ public class ArrayDeque<T> implements Iterable<T> {
         return null;
     }
 
+    @Override
     public T get(int index) {
         if(index >= 0 && index < size) {
             return items[(nextFirst + 1 + index) % capacity];
