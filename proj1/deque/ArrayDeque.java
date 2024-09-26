@@ -86,7 +86,7 @@ public class ArrayDeque<T> implements Iterable<T>, Deque<T> {
     @Override
     public T removeFirst() {
         if (size <= capacity / 4 && capacity >= 4) {
-                resize(capacity / 2);
+            resize(capacity / 2);
         }
         if (size > 0) {
             nextFirst = (nextFirst + 1) % capacity;

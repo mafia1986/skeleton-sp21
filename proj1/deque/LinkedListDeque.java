@@ -112,8 +112,7 @@ public class LinkedListDeque<T> implements Iterable<T>, Deque<T> {
     private T getRecursiveHelper(int index, Node<T> queue) {
         if (queue == sentinel) {
             return null;
-        }
-        else if (index == 0) {
+        } else if (index == 0) {
             return queue.value;
         }
         return getRecursiveHelper(index - 1, queue.next);
