@@ -110,8 +110,9 @@ public class LinkedListDeque<T> implements Iterable<T>, Deque<T> {
         return null;
     }
     private T getRecursiveHelper(int index, Node<T> queue) {
-        if (queue == sentinel)
+        if (queue == sentinel) {
             return null;
+        }
         else if (index == 0) {
             return queue.value;
         }
@@ -142,7 +143,7 @@ public class LinkedListDeque<T> implements Iterable<T>, Deque<T> {
             return true;
         }
         if (o instanceof LinkedListDeque<?>) {
-            LinkedListDeque<?> other = (LinkedListDeque<?>)o;
+            LinkedListDeque<?> other = (LinkedListDeque<?>) o;
             if (this.size == other.size) {
                 Iterator<?> otherIt = other.iterator();
                 Iterator<?> selfIt = iterator();

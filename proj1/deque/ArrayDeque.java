@@ -85,8 +85,8 @@ public class ArrayDeque<T> implements Iterable<T>, Deque<T> {
 
     @Override
     public T removeFirst() {
-        if (size <= capacity / 4) {
-            resize(capacity / 2);
+        if (size <= capacity / 4 && capacity >= 4) {
+                resize(capacity / 2);
         }
         if (size > 0) {
             nextFirst = (nextFirst + 1) % capacity;
@@ -98,7 +98,7 @@ public class ArrayDeque<T> implements Iterable<T>, Deque<T> {
 
     @Override
     public T removeLast() {
-        if (size <= capacity / 4) {
+        if (size <= capacity / 4 && capacity >= 4) {
             resize(capacity / 2);
         }
         if (size > 0) {
@@ -144,7 +144,7 @@ public class ArrayDeque<T> implements Iterable<T>, Deque<T> {
             return true;
         }
         if (o instanceof ArrayDeque<?>) {
-            ArrayDeque<?> other = (ArrayDeque<?>)o;
+            ArrayDeque<?> other = (ArrayDeque<?>) o;
             if (this.size == other.size) {
                 Iterator<?> otherIt = other.iterator();
                 Iterator<?> selfIt = iterator();
