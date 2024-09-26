@@ -1,10 +1,7 @@
 package gh2;
 
-// TODO: uncomment the following import once you're ready to start this portion
 import deque.ArrayDeque;
 import deque.Deque;
-import deque.LinkedListDeque;
-// TODO: maybe more imports
 
 //Note: This file will not compile until you complete the Deque implementations
 public class GuitarString {
@@ -15,14 +12,13 @@ public class GuitarString {
     private static final double DECAY = .996; // energy decay factor
 
     /* Buffer for storing sound data. */
-    // TODO: uncomment the following line once you're ready to start this portion
     private Deque<Double> buffer;
 
     /* Create a guitar string of the given frequency.  */
     public GuitarString(double frequency) {
-        int capacity = (int)Math.round(SR / frequency);
+        int capacity = (int) Math.round(SR / frequency);
         buffer = new ArrayDeque<Double>();
-        for(int i = 0; i < capacity; i += 1) {
+        for (int i = 0; i < capacity; i += 1) {
             buffer.addLast(0.0);
         }
     }
@@ -35,7 +31,7 @@ public class GuitarString {
         //       are different from each other. It means you should repeatedly call
         //       Math.random() - 0.5 to generate new random numbers for each array index.
         int n = buffer.size();
-        for(int i = 0; i < n; i += 1) {
+        for (int i = 0; i < n; i += 1) {
             double r = Math.random() - 0.5;
             buffer.removeFirst();
             buffer.addLast(r);
@@ -57,4 +53,4 @@ public class GuitarString {
         return buffer.get(0);
     }
 }
-    // TODO: Remove all comments that say TODO when you're done.
+

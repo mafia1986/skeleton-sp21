@@ -10,12 +10,12 @@ public class MaxArrayDeque<T> extends ArrayDeque<T> {
     }
 
     public T max() {
-        if(!isEmpty()) {
+        if (!isEmpty()) {
             Iterator<T> iter = iterator();
             T max = get(0);
-            while(iter.hasNext()) {
+            while (iter.hasNext()) {
                 T n = iter.next();
-                if(orgComparator.compare(max, n) < 0) {
+                if (orgComparator.compare(max, n) < 0) {
                     max = n;
                 }
             }
@@ -25,12 +25,12 @@ public class MaxArrayDeque<T> extends ArrayDeque<T> {
     }
 
     public T max(Comparator<T> c) {
-        if(!isEmpty()) {
+        if (!isEmpty()) {
             Iterator<T> iter = iterator();
             T max = get(0);
-            while(iter.hasNext()) {
+            while (iter.hasNext()) {
                 T n = iter.next();
-                if(c.compare(max, n) < 0) {
+                if (c.compare(max, n) < 0) {
                     max = n;
                 }
             }
