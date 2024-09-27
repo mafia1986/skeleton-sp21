@@ -9,6 +9,7 @@ public class ArrayDeque<T> implements Iterable<T>, Deque<T> {
     private int capacity;
     private int nextFirst;
     private int nextLast;
+
     public ArrayDeque() {
         size = 0;
         this.capacity = 8;
@@ -36,6 +37,7 @@ public class ArrayDeque<T> implements Iterable<T>, Deque<T> {
         nextLast = (nextLast + 1) % capacity;
         size += 1;
     }
+
     private void resize(int cap) {
         T[] a = (T[]) new Object[cap];
         int aIndex = cap / 4;
@@ -50,6 +52,7 @@ public class ArrayDeque<T> implements Iterable<T>, Deque<T> {
         nextLast = newNextLast;
         this.capacity = cap;
     }
+
     private boolean isFull() {
         if (size == capacity) {
             return true;
@@ -116,10 +119,12 @@ public class ArrayDeque<T> implements Iterable<T>, Deque<T> {
         }
         return null;
     }
+
     @Override
     public Iterator<T> iterator() {
         return new Iterator<T>() {
             private int index = (nextFirst + 1) % capacity;
+
             @Override
             public boolean hasNext() {
                 if (size > 0 && (index + 1) % capacity != nextLast) {
@@ -139,24 +144,23 @@ public class ArrayDeque<T> implements Iterable<T>, Deque<T> {
             }
         };
     }
+
     public boolean equals(Object o) {
         if (this == o) {
             return true;
         }
-        if (o instanceof ArrayDeque<?>) {
-            ArrayDeque<?> other = (ArrayDeque<?>) o;
-            if (this.size == other.size) {
-                Iterator<?> otherIt = other.iterator();
-                Iterator<?> selfIt = iterator();
-                while (selfIt.hasNext()) {
-                    T selfValue = (T) selfIt.next();
-                    T otherValue = (T) otherIt.next();
+        if (o instanceof Deque<?>) {
+            Deque<?> other = (Deque<?>) o;
+            if (this.size() == other.size()) {
+                for (int i = 0; i < this.size(); i += 1) {
+                    T selfValue = (T) this.get(i);
+                    T otherValue = (T) other.get(i);
                     if (!selfValue.equals(otherValue)) {
                         return false;
                     }
                 }
-                return true;
             }
+            return true;
         }
         return false;
     }
